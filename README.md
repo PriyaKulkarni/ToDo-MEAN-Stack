@@ -16,7 +16,12 @@ You'll need the following installed on your machine for this application to work
     ```
     git clone https://github.com/PriyaKulkarni/ToDo-MEAN-Stack.git
     ```
- 2. Start the server from the root of the project: (Prior to this, make sure to connect to MongoDB)
+ 2. Download dependency packages: (node_modules folder will be created)
+
+    ```
+    npm install
+    ```
+ 3. Start the server from the root of the project: (Prior to this, make sure to connect to MongoDB)
 
     ```
     npm start
@@ -29,10 +34,10 @@ You'll need the following installed on your machine for this application to work
     ```
     nodemon server.js 
     ```
- 3. Navigate to http://localhost:3000 from your broswer to view the application.
+ 4. Navigate to http://localhost:3000 from your broswer to view the application.
   (If any other applications are running on server port 3000, change to a different port)
 
-### Licence
+### License
 MIT
 
 [Node.js]: <http://nodejs.org>
