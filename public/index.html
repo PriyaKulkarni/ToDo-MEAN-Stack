@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html ng-app = "appTodo">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">.
+
+	<title>To-Do List</title>
+
+    <style>
+        .todoform {text-align: center;}
+    </style>
+
+    <!--load angular.js file-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<body ng-controller = "mainCtrl">
+    <div class="todoform">
+    	<h2>My Todo List {{ todos.length }}</h2>
+
+    	<div class="todolist" ng-repeat="todo in todos"> 
+            <span ng-show="!isEditable[$index]">{{ todo.text }}</span>
+            <form ng-submit="updateTodo(todo._id)" ng-if = "isEditable[$index]">
+                <input  type="text" ng-model="newItem.text" required = "true" /> 
+                <button type="submit">Save</button>
+                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null">Cancel</button>
+            </form>
+
+            <div>
+                <button type="submit" ng-click="isEditable[$index] = true">Update</button>
+                <button ng-click = "deleteTodo(todo._id)">Delete</button>
+            </div>
+            <br/>
+        </div>
+
+        <br/>
+
+        <form ng-submit = "createTodo()">
+            <input type="text" placeholder="Add a to-do here..." ng-model="formData.text" oninvalid="this.setCustomValidity('Empty field! Please enter a new item to be added')" oninput="setCustomValidity('')" autofocus="" required />
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</body>
