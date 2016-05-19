@@ -5,32 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">.
 
-	<title>To-Do List</title>
+    <title>To-Do List</title>
 
     <style>
-        .todoform {text-align: center;}
+    .pagestyle { font: italic bold 14px/30px Georgia, serif; background-color: Azure;  }
     </style>
+    <!-- Bootstrap -->
+    <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
 
     <!--load angular.js file-->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
 </head>
 
-<body ng-controller = "mainCtrl">
-    <div class="todoform">
-    	<h2>My Todo List {{ todos.length }}</h2>
-
-    	<div class="todolist" ng-repeat="todo in todos"> 
-            <span ng-show="!isEditable[$index]">{{ todo.text }}</span>
+<body ng-controller = "mainCtrl" class= "pagestyle">
+    <div class ="text-center">
+        <h2> My Todo List {{ todos.length }} </h2>
+        
+        <div ng-repeat="todo in todos"> 
+            <span ng-show="!isEditable[$index]"> {{ todo.text }} </span>
             <form ng-submit="updateTodo(todo._id)" ng-if = "isEditable[$index]">
-                <input  type="text" ng-model="newItem.text" required = "true" /> 
-                <button type="submit">Save</button>
-                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null">Cancel</button>
+                <input  type="text" ng-value="todo.text" ng-model="newItem.text" required = "true" /> 
+                <button type="submit" class="btn btn-success"> Save </button>
+                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null" class="btn btn-warning"> Cancel </button>
             </form>
 
-            <div>
-                <button type="submit" ng-click="isEditable[$index] = true">Update</button>
-                <button ng-click = "deleteTodo(todo._id)">Delete</button>
+            <div ng-show = "!isEditable[$index]">
+                <button type="submit" ng-click="isEditable[$index] = true" class="btn btn-info"> Update </button>
+                <button ng-click = "deleteTodo(todo._id)" class="btn btn-danger"> Delete </button>
             </div>
             <br/>
         </div>
@@ -38,8 +44,8 @@
         <br/>
 
         <form ng-submit = "createTodo()">
-            <input type="text" placeholder="Add a to-do here..." ng-model="formData.text" oninvalid="this.setCustomValidity('Empty field! Please enter a new item to be added')" oninput="setCustomValidity('')" autofocus="" required />
-            <button type="submit">Add</button>
+            <input type="text" size="40%" placeholder="Add a to-do here..." ng-model="formData.text" oninvalid="this.setCustomValidity('Empty field! Please enter a new item to be added')" oninput="setCustomValidity('')" autofocus="" required />
+            <button type="submit" class ="btn btn-success"> Add </button>
         </form>
     </div>
 </body>
