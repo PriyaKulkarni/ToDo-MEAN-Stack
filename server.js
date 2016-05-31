@@ -25,7 +25,7 @@ app.use(express.static(__dirname + '/public'));			// "public" off of current is 
 
 // define model
 var Todo = mongoose.model('Todo', {
-	text : String,
+	text : String
 });
 
 //routes

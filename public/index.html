@@ -25,18 +25,16 @@
 <body ng-controller = "mainCtrl" class= "pagestyle">
     <div class ="text-center">
         <h2> My Todo List {{ todos.length }} </h2>
-        
-        <div ng-repeat="todo in todos"> 
             <span ng-show="!isEditable[$index]"> {{ todo.text }} </span>
             <form ng-submit="updateTodo(todo._id)" ng-if = "isEditable[$index]">
                 <input  type="text" ng-value="todo.text" ng-model="newItem.text" required = "true" /> 
-                <button type="submit" class="btn btn-success"> Save </button>
-                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null" class="btn btn-warning"> Cancel </button>
+                <button type="submit" class="btn btn-xs btn-success"> Save </button>
+                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null" class="btn btn-xs btn-warning"> Cancel </button>
             </form>
 
             <div ng-show = "!isEditable[$index]">
-                <button type="submit" ng-click="isEditable[$index] = true" class="btn btn-info"> Update </button>
-                <button ng-click = "deleteTodo(todo._id)" class="btn btn-danger"> Delete </button>
+                <button type="submit" ng-click="isEditable[$index] = true" class="btn btn-xs btn-info"> Update </button>
+                <button ng-click = "deleteTodo(todo._id)" class="btn btn-xs btn-danger"> Delete </button>
             </div>
             <br/>
         </div>
