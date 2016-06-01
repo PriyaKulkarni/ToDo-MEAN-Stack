@@ -37,7 +37,7 @@ var Todo = mongoose.model('Todo', {
 
 		Todo.find(function(err, todos) {
 			if (err)
-                res.send(err);
+				res.send(err);
 
 			res.json(todos);
 		});
@@ -48,11 +48,11 @@ var Todo = mongoose.model('Todo', {
         
 		Todo.create({ text : req.body.text }, function(err, todo) {
 			if (err)
-                res.send(err);
+				res.send(err);
 
 			Todo.find(function(err, todos) {
 				if (err)
-            	    res.send(err);
+					res.send(err);
 
 				res.json(todos);
 			});
@@ -66,11 +66,11 @@ var Todo = mongoose.model('Todo', {
 		if(req.body.text != null) {
 			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { text: req.body.text}, function(err, todo) {
 				if (err)
-	                res.send(err);
+					res.send(err);
 
 				Todo.find(function(err, todos) {
 					if (err)
-	            	    res.send(err);
+	            		res.send(err);
 
 					res.json(todos);
 				});
@@ -80,11 +80,11 @@ var Todo = mongoose.model('Todo', {
 		else if(req.body.done) {
 			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { done: true }, function(err, todo) {
 				if (err)
-	                res.send(err);
+					res.send(err);
 
 				Todo.find(function(err, todos) {
 					if (err)
-	            	    res.send(err);
+						res.send(err);
 
 					res.json(todos);
 				});
@@ -94,11 +94,11 @@ var Todo = mongoose.model('Todo', {
 		else {
 			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { done: false }, function(err, todo) {
 				if (err)
-	                res.send(err);
+					res.send(err);
 
 				Todo.find(function(err, todos) {
 					if (err)
-	            	    res.send(err);
+						res.send(err);
 
 					res.json(todos);
 				});
@@ -112,11 +112,11 @@ var Todo = mongoose.model('Todo', {
 
 		Todo.remove({ _id : req.params.todo_id }, function(err, todo) {
 			if (err)
-                res.send(err);
+				res.send(err);
 
 			Todo.find(function(err, todos) {
 				if (err)
-                	res.send(err);
+					res.send(err);
 
 				res.json(todos);
 			});
