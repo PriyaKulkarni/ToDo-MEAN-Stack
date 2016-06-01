@@ -25,7 +25,8 @@ app.use(express.static(__dirname + '/public'));			// "public" off of current is 
 
 // define model
 var Todo = mongoose.model('Todo', {
-	text : String
+	text : {type: String, reqired: true },
+	done : {type : Boolean, default: false}
 });
 
 //routes
@@ -61,17 +62,48 @@ var Todo = mongoose.model('Todo', {
 	//update a to-do
 	app.put('/api/todos/:todo_id',function(req, res) {
 
-		Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { text: req.body.text }, function(err, todo) {
-			if (err)
-                res.send(err);
-
-			Todo.find(function(err, todos) {
+		//edit to-do text
+		if(req.body.text != null) {
+			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { text: req.body.text}, function(err, todo) {
 				if (err)
-            	    res.send(err);
+	                res.send(err);
 
-				res.json(todos);
+				Todo.find(function(err, todos) {
+					if (err)
+	            	    res.send(err);
+
+					res.json(todos);
+				});
 			});
-		});
+		}
+		//changes 'done' field/status to true and puts it to the 'Completes tasks' list
+		else if(req.body.done) {
+			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { done: true }, function(err, todo) {
+				if (err)
+	                res.send(err);
+
+				Todo.find(function(err, todos) {
+					if (err)
+	            	    res.send(err);
+	            	
+					res.json(todos);
+				});
+			});
+		}
+		//changes 'done' field/status to false and puts it back to the 'To-Dos List'
+		else {
+			Todo.findByIdAndUpdate({ _id: req.params.todo_id }, { done: false }, function(err, todo) {
+				if (err)
+	                res.send(err);
+
+				Todo.find(function(err, todos) {
+					if (err)
+	            	    res.send(err);
+
+					res.json(todos);
+				});
+			});
+		}
 	});
 
 

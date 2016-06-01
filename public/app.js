@@ -4,6 +4,9 @@ app.controller("mainCtrl", function($scope, $http){
 	$scope.formData = {};
 	$scope.newItem = {};
 
+	$scope.doneFilter = { done : true };
+	$scope.notDoneFilter = { done : false };
+
 	$http.get('/api/todos')
 		.success(function(data){
 			$scope.todos = data;
@@ -20,7 +23,6 @@ app.controller("mainCtrl", function($scope, $http){
 	$scope.updateTodo = function(id) {
 		$http.put('/api/todos/'+id , $scope.newItem)
 			.success(function(data) {
-				$scope.isEditable = false;
 				$scope.todos = data;
 				$scope.newItem = {};
 			});
