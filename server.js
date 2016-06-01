@@ -16,9 +16,9 @@ var express = require ('express');
 		}
 	});
 
-app.use(bodyParser.json());								// parse application/json
+app.use(bodyParser.json());		// parse application/json
 app.use(bodyParser.urlencoded({extended : true}));		// parse application/x-www-form-urlencoded
-app.use(morgan('dev'));									// log concise output for development
+app.use(morgan('dev'));		// log concise output for development
 app.use(methodOverride());								// override with the X-HTTP-Method-Override(default) header in the request
 
 app.use(express.static(__dirname + '/public'));			// "public" off of current is root
@@ -85,7 +85,7 @@ var Todo = mongoose.model('Todo', {
 				Todo.find(function(err, todos) {
 					if (err)
 	            	    res.send(err);
-	            	
+
 					res.json(todos);
 				});
 			});
