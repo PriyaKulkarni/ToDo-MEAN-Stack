@@ -1,0 +1,23 @@
+<div>
+    <br>
+    <form ng-submit = "createTodo()">
+        <input type="text" size="40%" placeholder="Add a to-do here..." ng-model="formData.text" oninvalid="this.setCustomValidity('Empty field! Please enter a new item to be added')" oninput="setCustomValidity('')" autofocus="" required />
+        <button type="submit" class ="btn btn-success"> Add </button>
+    </form>
+
+
+    <h3><b>To-Dos' List</b></h3>
+    <h4>Number of tasks remaining: <b>{{ todoList.length }}</b></h4>
+    <br>
+    <div ng-repeat="todo in todoList = (todos | filter : notDoneFilter)">
+        <span ng-show="!isEditable[$index]">
+            <input type="checkbox" ng-model="newItem.done" ng-change= "updateTodo(todo._id)" > {{ todo.text }}
+        </span>
+        <form ng-submit="updateTodo(todo._id)" ng-if = "isEditable[$index]">
+            <input  type="text" size="30%" ng-value="todo.text" ng-model="newItem.text" required = "true" />
+            <button type="submit" class="btn btn-xs btn-success glyphicon glyphicon-ok"> Save </button>
+            <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null" class="btn btn-xs btn-warning glyphicon glyphicon-remove"> Cancel </button>
+        </form>
+        <span ng-show="!isEditable[$index]" ng-click="isEditable[$index] = true" class="btn btn-xs btn-info glyphicon glyphicon-pencil"><b> Edit </b></span>
+    </div>
+</div>

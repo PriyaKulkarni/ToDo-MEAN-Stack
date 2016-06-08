@@ -1,0 +1,9 @@
+<h3><b>Completed tasks</b></h3>
+<h4>Number of tasks completed: <b>{{ completedList.length }}</b></h4>
+<br>
+<div ng-repeat="todo in completedList = (todos | filter : doneFilter)">
+	<span class="completed-task" ng-show="!isEditable[$index]">
+		<input type="checkbox" ng-model="todo.done" ng-change="updateTodo(todo._id)"> {{ todo.text }}
+		<span ng-show="!isEditable[$index]" ng-click = "deleteTodo(todo._id)" class="btn btn-xs btn-danger glyphicon glyphicon-trash"><b> Delete </b></span>
+	</span>
+</div>

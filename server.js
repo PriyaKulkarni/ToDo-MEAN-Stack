@@ -70,7 +70,7 @@ var Todo = mongoose.model('Todo', {
 
 				Todo.find(function(err, todos) {
 					if (err)
-	            		res.send(err);
+						res.send(err);
 
 					res.json(todos);
 				});

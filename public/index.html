@@ -11,11 +11,13 @@
     .pagestyle { font: italic bold 14px/30px Georgia, serif; background-color: Azure;  }
     .completed-task{ text-decoration:line-through; }
     </style>
+
     <!-- Bootstrap -->
     <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
 
-    <!--load angular.js file-->
+    <!--load angular and angular-route via CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -23,36 +25,28 @@
     <script src="app.js"></script>
 </head>
 
-<body ng-controller = "mainCtrl" class= "pagestyle">
-    <div class ="text-center">
-
-        <form ng-submit = "createTodo()">
-            <input type="text" size="40%" placeholder="Add a to-do here..." ng-model="formData.text" oninvalid="this.setCustomValidity('Empty field! Please enter a new item to be added')" oninput="setCustomValidity('')" autofocus="" required />
-            <button type="submit" class ="btn btn-success"> Add </button>
-        </form>
-
-        <h3><b>To-Dos List</b></h3>
-        <div ng-repeat="todo in todos | filter : notDoneFilter">
-            <span ng-show="!isEditable[$index]">
-                <input type="checkbox" ng-model="newItem.done" ng-change= "updateTodo(todo._id)" > {{ todo.text }}
-            </span>
-            <form ng-submit="updateTodo(todo._id)" ng-if = "isEditable[$index]">
-                <input  type="text" ng-value="todo.text" ng-model="newItem.text" required = "true" />
-                <button type="submit" class="btn btn-xs btn-success"> Save </button>
-                <button type="submit" ng-click="isEditable[$index] = false; newItem.text = null" class="btn btn-xs btn-warning"> Cancel </button>
-            </form>
-            <span ng-show="!isEditable[$index]" ng-click="isEditable[$index] = true" class="btn btn-xs btn-info">Edit</span>
+<body class= "pagestyle">
+    <div class="container">
+        <div class="navbar navbar-header">
+            <div class="menu">
+                <h2>Menu</h2>
+                <ul class="nav nav-tabs">
+                <!--<ul class="nav nav-pills"> -->
+                    <li>
+                        <a href="#/">To-do List</a>
+                    </li>
+                    <li>
+                        <a href="#/completed-list">Completed</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="main">
+                <!-- angular templating -->
+                <!-- this is where content will be injected -->
+                <div ng-view=""></div>
+            </div>
         </div>
-        
-
-        <h3><b>Completed tasks</b></h3>
-        <div class="completed-task" ng-repeat="todo in todos | filter : doneFilter">
-            <span ng-show="!isEditable[$index]">
-            <input type="checkbox" ng-model="todo.done" ng-change="updateTodo(todo._id)"> {{ todo.text }}
-            <span ng-show="!isEditable[$index]" ng-click = "deleteTodo(todo._id)" class="btn btn-xs btn-danger">Delete</span>
-            </span>
-        </div>
-    </div>
+    </div>  
 </body>
 
 </html>

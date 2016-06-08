@@ -1,4 +1,19 @@
-var app = angular.module("appTodo", []);
+var app = angular.module("appTodo", ['ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider
+		.when('/', {
+			templateUrl: 'templates/TodoList.html',
+			controller: 'mainCtrl'
+		})
+		.when('/completed-list', {
+			templateUrl: 'templates/CompletedList.html',
+			controller: 'mainCtrl'
+		})
+		.otherwise ({
+			redirectTo: '/'
+		});
+});
 
 app.controller("mainCtrl", function($scope, $http){
 	$scope.formData = {};
