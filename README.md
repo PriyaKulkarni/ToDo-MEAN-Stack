@@ -35,7 +35,7 @@ You'll need the following installed on your machine for this application to work
     nodemon server.js 
     ```
  4. Navigate to http://localhost:3000 from your broswer to view the application.
-  (If any other applications are running on server port 3000, change to a different port)
+  (If any other application is running on server port 3000, change to a different port)
 
 ### License
 MIT
